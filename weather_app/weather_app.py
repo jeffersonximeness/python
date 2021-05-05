@@ -67,8 +67,9 @@ def previsao_futura(json_previsao):
         clima_dia['max'] = dia['Temperature']['Maximum']['Value']
         clima_dia['min'] = dia['Temperature']['Minimum']['Value']
         clima_dia['clima'] = dia['Day']['IconPhrase']
-        clima_dia['dia'] = dia['EpochDate']
-        
+        dia_semana = int(date.fromtimestamp(dia['EpochDate']).strftime('%w'))
+        clima_dia['dia'] = dias[dia_semana]
+
         info_5_dias.append(clima_dia)
 
     return info_5_dias 
@@ -86,10 +87,12 @@ if __name__ == '__main__':
 
     json_previsao = previsao_futura_json(local['codigo_local'])
     lista_dias = previsao_futura(json_previsao)
+
+    print('Clima para hoje e para os próximos dias...\n')
     
     for dia in lista_dias:
         print(dia['dia'])
         print('Mínima: {} {}C'.format(str(dia['min']), '\xb0'))
         print('Máxima: {} {}C'.format(str(dia['max']), '\xb0'))
         print('Clima: {}'.format(str(dia['clima'])))
-        print('----------------------------------')
+        print('--------------------------------------------------')
