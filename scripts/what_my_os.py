@@ -19,7 +19,7 @@ def what_is_my_os():
         print("What a shame... It's not even worth the effort!\n")
     
     else:
-            print("Unidentified system :O\n")
+        print("Unidentified system :O\n")
 
 if __name__ == '__main__':
     what_is_my_os()
